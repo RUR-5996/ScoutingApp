@@ -1,0 +1,3 @@
+pandas
+scikit-learn
+windows-curses # Only necessary on Windows
