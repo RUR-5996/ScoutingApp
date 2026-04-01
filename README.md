@@ -18,7 +18,7 @@ python get_team_avg.py
 ```
  - [x] Rank teams based on custom criteria
  ```
-python sort_teams.py
+python rank_teams.py
 ```
 
  - [ ] Train ML model
