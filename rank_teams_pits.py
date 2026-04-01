@@ -2,7 +2,9 @@ import pandas as pd
 import os
 import get_team_avg
 
-def sort_teams(criteria=(), requirements=()) -> None: # tuple in format ((Column: str, weight: float ∈ [0, 1]))
+# for criteria: tuple in format ((Column: str, weight: float ∈ [0, 1]) * n)
+# for requirements: tuple in format ((Column: str, operator /==, >, </: str, value: str /for ==/ float /for > and </) * n)
+def sort_teams(criteria=(), requirements=()) -> None: 
     try:
         event_df: pd.DataFrame = pd.read_csv("data/pit_data.csv")
     except:
@@ -14,7 +16,7 @@ def sort_teams(criteria=(), requirements=()) -> None: # tuple in format ((Column
     for requirement in requirements:
         for i in range(len(event_df)):
             if requirement[1] == "==":
-                if event_df.loc[i, requirement[0]] != requirement[2]:
+                if str(event_df.loc[i, requirement[0]]) != str(requirement[2]):
                     passes_requirements[i] = False
             elif requirement[1] == ">":
                 if event_df.loc[i, requirement[0]] <= requirement[2]:
