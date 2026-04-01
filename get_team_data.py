@@ -1,4 +1,6 @@
 import pandas as pd
+import os
+import get_raw_data
 import curses
 
 # Function to split the data into rows for each team and retain all relevant columns
@@ -9,9 +11,9 @@ def split_data_for_teams(match_data_df):
     # Get all columns in the DataFrame
     all_columns = match_data_df.columns.tolist()
 
-    # Identify columns related to Autolinerobot and Endgamerobot
-    autolinerobot_columns = [col for col in all_columns if 'Autolinerobot' in col]
-    endgamerobot_columns = [col for col in all_columns if 'Endgamerobot' in col]
+    # Identify columns related to Autotowerrobot and Endgametowerrobot
+    autolinerobot_columns = [col for col in all_columns if 'Autotowerrobot' in col]
+    endgamerobot_columns = [col for col in all_columns if 'Endgametowerrobot' in col]
 
     # Loop through each row in the original DataFrame
     for _, row in match_data_df.iterrows():
@@ -19,14 +21,14 @@ def split_data_for_teams(match_data_df):
             team_name = row[f'Team{i}']
             
             if pd.notna(team_name):  # Skip if team name is NaN
-                # Prepare the corresponding Autolinerobot and Endgamerobot columns for the current team
+                # Prepare the corresponding Autotowerrobot and Endgametowerrobot columns for the current team
                 team_entry = {
                     "Team": team_name,
-                    "Autolinerobot": row[f'Autolinerobot{i}'],
-                    "Endgamerobot": row[f'Endgamerobot{i}'],
+                    "Autotowerrobot": row[f'Autotowerrobot{i}'],
+                    "Endgametowerrobot": row[f'Endgametowerrobot{i}'],
                 }
 
-                # Add all other columns (excluding Autolinerobot and Endgamerobot) for the current row
+                # Add all other columns (excluding Autotowerrobot and Endgametowerrobot) for the current row
                 for column in all_columns:
                     if column not in autolinerobot_columns and column not in endgamerobot_columns and column not in ['Team1', 'Team2', 'Team3']:
                         team_entry[column] = row[column]
@@ -104,13 +106,17 @@ def select_match_id(matches):
 
 # Main function to run the program
 def main():
+
+    # If data don't exist, generate it
+    if not os.path.exists("data/team_split_data.csv"):
+        get_raw_data.main()
+
     # Load the match data from the CSV file
     match_data_df = pd.read_csv("data/all_match_data.csv")
 
     # Split the data into rows for each team and sort by team
     team_data_df = split_data_for_teams(match_data_df)
-
-    # Save the split data to a new CSV file
+# Save the split data to a new CSV file
     team_data_df.to_csv("data/team_split_data.csv", index=False)
     print("\nTeam split data with all stats saved to 'data/team_split_data.csv'")
 

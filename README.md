@@ -1,6 +1,6 @@
 # **FRC Scouting App**
 
-App for scouting FRC teams using BlueAlliance. Built by [Filip Martinek](https://github.com/FilipMartinek/), [R.U.R. 5996](https://www.rur-porg.cz/).
+App for scouting FRC teams using BlueAlliance. Built by [Filip Martinek](https://github.com/FilipMartinek/), [M. Filip](https://github.com/mfilip123), [R.U.R. 5996](https://www.rur-porg.cz/).
 
 ## Run/TODO
 
@@ -12,6 +12,12 @@ python get_raw_data.py
 ```
 python get_team_data.py 
 ```
+ - [x] Calculate average stats of teams at event
+```
+python get_team_avg.py
+```
+ - [ ] Rank teams based on custom criteria
+
  - [ ] Train ML model
 ```
 python train.py 
@@ -19,9 +25,9 @@ python train.py
 
 ## Dependencies
 
- - Python 3.6+ (tested on Python 3.12.6)
+ - Python 3.6+ (tested on Python 3.14.3)
 
  - Install Libraries:
  ```
- pip install -r requirements.txt
+ python -m pip install -r requirements.txt
  ```
