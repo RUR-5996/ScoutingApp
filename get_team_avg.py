@@ -41,6 +41,8 @@ def get_avg_data(teams_in_event) -> None:
 
         avg_df = pd.concat([avg_df, pd.DataFrame([avg_data])], ignore_index=True)
 
+        
+    avg_df = avg_df.round(3)
     avg_df.to_csv("data/event_avg.csv")
 
 def main() -> None:
@@ -51,6 +53,8 @@ def main() -> None:
     # If data doesn't exist, generate it
     if not os.path.exists("data/team_split_data.csv"):
         get_team_data.main()
+
+    get_avg_data(teams_in_event)
         
 
 if __name__ == "__main__":

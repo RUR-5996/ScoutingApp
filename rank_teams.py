@@ -17,6 +17,8 @@ def sort_teams(criteria) -> None: # tuplet in format ((Column: str, weight: int 
     event_df = event_df.sort_values(by="sum", ascending=False)
     print(event_df)
     
+
+    event_df = event_df.round(3)
     event_df.to_csv("data/ranked_teams.csv")
         
         
