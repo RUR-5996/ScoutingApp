@@ -2,7 +2,7 @@ import pandas as pd
 import os
 import get_team_data
 
-def get_avg_data(teams_in_event) -> pd.DataFrame:
+def get_avg_data(teams_in_event) -> None:
 
     team_data_df: pd.DataFrame = pd.read_csv("data/team_split_data.csv")
 
@@ -41,11 +41,7 @@ def get_avg_data(teams_in_event) -> pd.DataFrame:
 
         avg_df = pd.concat([avg_df, pd.DataFrame([avg_data])], ignore_index=True)
 
-    avg_df = avg_df.sort_values(by="Score", ascending=False)
-
     avg_df.to_csv("data/event_avg.csv")
-
-    return avg_df
 
 def main() -> None:
     # Read team numbers from txt file
@@ -56,8 +52,6 @@ def main() -> None:
     if not os.path.exists("data/team_split_data.csv"):
         get_team_data.main()
         
-    print(get_avg_data(teams_in_event))
-            
 
 if __name__ == "__main__":
     main()
