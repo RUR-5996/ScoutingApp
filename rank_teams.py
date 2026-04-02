@@ -29,7 +29,7 @@ def main() -> None:
         get_team_avg.main()
         
 
-    sort_teams((("Score", 0.8), ("Totalautopoints", 0.6)))
+    sort_teams((("Score", 0.8),))
 
 
 if __name__ == "__main__":
